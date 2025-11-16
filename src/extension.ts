@@ -1214,7 +1214,7 @@ class PlinkoPanel {
                 ctx.fillStyle = '#000';
                 ctx.font = 'bold 12px sans-serif';
                 ctx.textAlign = 'center';
-                const multiplierText = slot.multiplier >= 100 ? slot.multiplier.toString() : slot.multiplier + 'x';
+                const multiplierText = slot.multiplier >= 100 ? slot.multiplier.toString() : slot.multiplier + '×';
                 ctx.fillText(
                     multiplierText,
                     slot.x + slot.width / 2,
