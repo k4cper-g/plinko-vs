@@ -1,9 +1,9 @@
 {
   "name": "plinko-vs",
-  "displayName": "Plinko Simulator",
-  "description": "A fun Plinko ball simulation game in VSCode",
+  "displayName": "Plinko VS",
+  "description": "Bored of waiting for your AI agent to finish code? Gamble your time away with Plinko right inside VSCode!",
   "version": "1.0.0",
-  "publisher": "k4cper-g",
+  "publisher": "k4cperg",
   "license": "MIT",
   "icon": "src/plinko-icon.png",
   "repository": {
@@ -18,7 +18,7 @@
     "game",
     "plinko",
     "fun",
-    "entertainment",
+    "brainrot",
     "simulator",
     "gambling"
   ],
