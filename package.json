@@ -1,5 +1,5 @@
 {
-  "name": "plinko-extension",
+  "name": "plinko-vs",
   "displayName": "Plinko Simulator",
   "description": "A fun Plinko ball simulation game in VSCode",
   "version": "1.0.0",
