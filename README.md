@@ -2,6 +2,8 @@
 
 Bored of waiting for your AI agent to finish code? Gamble your time away with Plinko right inside VSCode!
 
+Visual Studio Code - [Extension Development Host] Plinko Game - c: - Visual Studio Code - 16 November 2025 - Watch Video
+
 ## Features
 
 - Realistic physics simulation with gravity and collision detection
