@@ -4,9 +4,6 @@ Bored of waiting for your AI agent to finish code? Gamble your time away with Pl
 
 <div>
     <a href="https://www.loom.com/share/2e6e8fbdc47e40a0a236b9c6a481b034">
-      <p>Visual Studio Code - [Extension Development Host] Plinko Game - c: - Visual Studio Code - 16 November 2025 - Watch Video</p>
-    </a>
-    <a href="https://www.loom.com/share/2e6e8fbdc47e40a0a236b9c6a481b034">
       <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/2e6e8fbdc47e40a0a236b9c6a481b034-04f2d1835e2dd40c-full-play.gif#t=0.1">
     </a>
   </div>
