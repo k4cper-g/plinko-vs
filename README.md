@@ -4,7 +4,7 @@
 
 Bored of waiting for your AI agent to finish code? Gamble your time away with Plinko right inside VSCode!
 
-> [Download](https://marketplace.visualstudio.com/items?itemName=k4cperg.plinko-vs) <
+> [Download](https://marketplace.visualstudio.com/items?itemName=k4cperg.plinko-vs) 
 
 ## Features
 
