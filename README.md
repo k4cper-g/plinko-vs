@@ -1,6 +1,6 @@
-# Plinko Simulator VSCode Extension
+# Plinko VSCode Extension
 
-A fun Plinko ball simulation game right inside Visual Studio Code! Watch balls drop through pegs and land in multiplier slots, just like the popular gambling game.
+Bored of waiting for your AI agent to finish code? Gamble your time away with Plinko right inside VSCode!
 
 ## Features
 
@@ -37,16 +37,6 @@ A fun Plinko ball simulation game right inside Visual Studio Code! Watch balls d
 - Click **Auto Drop (10)** to drop 10 balls automatically with a delay
 - Watch the ball bounce through the pegs and land in a multiplier slot
 - The multiplier slots show your potential winnings (in a real game)
-
-## Multiplier Distribution
-
-- **10x** - Extreme edges (rarest)
-- **5x** - Near edges
-- **3x** - Mid-outer positions
-- **2x** - Mid positions
-- **1.5x** - Mid-inner positions
-- **1x** - Center positions
-- **0.5x** - Just off-center (worst multiplier)
 
 ## Development
 
