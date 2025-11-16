@@ -64,6 +64,10 @@ class PlinkoPanel {
     }
 
     private _getHtmlForWebview(extensionUri: vscode.Uri): string {
+        const logoUri = this._panel.webview.asWebviewUri(
+            vscode.Uri.joinPath(extensionUri, 'src', 'plinko-logo.svg')
+        );
+
         return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -98,13 +102,14 @@ class PlinkoPanel {
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #fff;
-            font-style: italic;
-            font-family: 'Roboto', sans-serif;
-            letter-spacing: 2px;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .logo img {
+            height: 28px;
+            width: auto;
         }
 
         .top-controls {
@@ -271,6 +276,16 @@ class PlinkoPanel {
             gap: 20px;
         }
 
+        /* Scale canvas for medium viewports */
+        @media (max-width: 1200px) and (min-width: 801px) {
+            #canvas {
+                max-width: calc(100vw - 320px);
+                max-height: calc(100vh - 100px);
+                width: auto !important;
+                height: auto !important;
+            }
+        }
+
         /* Responsive sidebar for small viewports */
         @media (max-width: 800px) {
             .sidebar {
@@ -286,7 +301,7 @@ class PlinkoPanel {
 
             .sidebar .mode-toggle {
                 width: 100%;
-                order: 5;
+                order: 6;
                 padding: 3px;
             }
 
@@ -324,6 +339,10 @@ class PlinkoPanel {
 
             .sidebar .control-group:nth-child(4) {
                 order: 4;
+            }
+
+            .sidebar .control-group:nth-child(5) {
+                order: 5;
             }
 
             .sidebar .drop-btn {
@@ -397,11 +416,22 @@ class PlinkoPanel {
             overflow: hidden;
         }
 
+        .input-prefix {
+            color: #7a8a99;
+            font-size: 15px;
+            font-weight: 600;
+            padding-left: 12px;
+            padding-right: 4px;
+            user-select: none;
+            display: flex;
+            align-items: center;
+        }
+
         .bet-input {
             flex: 1;
             background: transparent;
             border: none;
-            padding: 12px;
+            padding: 12px 12px 12px 0;
             color: #fff;
             font-size: 14px;
             min-width: 0;
@@ -486,20 +516,26 @@ class PlinkoPanel {
             align-items: center;
             justify-content: center;
             position: relative;
+            overflow: visible;
         }
 
         #canvas {
             background: #0f212e;
             border-radius: 12px;
+            max-width: 100%;
+            max-height: 100vh;
+            height: auto;
+            width: auto;
         }
 
         .multiplier-history {
-            position: absolute;
+            position: fixed;
             right: 20px;
-            top: 20px;
+            top: 80px;
             display: flex;
             flex-direction: column;
             gap: 0;
+            z-index: 100;
         }
 
         .multiplier-card {
@@ -525,7 +561,7 @@ class PlinkoPanel {
 </head>
 <body>
     <div class="top-bar">
-        <div class="logo">Plinko</div>
+        <div class="logo"><img src="${logoUri}" alt="Plinko"></div>
         <div class="top-controls">
             <button class="mute-btn" id="muteBtn"><i data-lucide="volume-2"></i></button>
             <div class="balance-display">
@@ -555,6 +591,7 @@ class PlinkoPanel {
             <div class="control-group">
                 <label class="control-label">Bet Amount</label>
                 <div class="input-wrapper">
+                    <span class="input-prefix">$</span>
                     <input type="number" class="bet-input" id="betAmount" value="10" min="1">
                     <button class="bet-btn" id="halveBtn">½</button>
                     <button class="bet-btn" id="doubleBtn">2×</button>
@@ -564,7 +601,7 @@ class PlinkoPanel {
             <div class="control-group" id="numberOfBetsGroup" style="display: none;">
                 <label class="control-label">Number of Bets</label>
                 <div class="input-wrapper">
-                    <input type="number" class="bet-input" id="numberOfBets" value="10" min="1" max="100">
+                    <input type="number" class="bet-input" id="numberOfBets" value="10" min="1" max="100" style="padding-left: 12px;">
                 </div>
             </div>
 
@@ -984,7 +1021,10 @@ class PlinkoPanel {
             }
             autoBetsRemaining = 0;
             isAutoMode = false;
-            dropBtn.textContent = 'Start Auto';
+
+            // Update button text based on current mode
+            const isAuto = autoBtn.classList.contains('active');
+            dropBtn.textContent = isAuto ? 'Start Autobet' : 'Drop Ball';
             dropBtn.style.background = '';
             // Re-enable input and restore original value
             numberOfBetsInput.disabled = false;
@@ -1011,7 +1051,7 @@ class PlinkoPanel {
 
             isAutoMode = true;
             autoBetsRemaining = numberOfBets;
-            dropBtn.textContent = 'Stop Auto';
+            dropBtn.textContent = 'Stop Autobet';
             dropBtn.style.background = '#ff8800';
             // Disable input during auto mode
             numberOfBetsInput.disabled = true;
@@ -1274,7 +1314,7 @@ class PlinkoPanel {
             autoBtn.classList.add('active');
             manualBtn.classList.remove('active');
             numberOfBetsGroup.style.display = 'block';
-            dropBtn.textContent = 'Start Auto';
+            dropBtn.textContent = 'Start Autobet';
         });
 
         halveBtn.addEventListener('click', () => {
@@ -1314,11 +1354,14 @@ class PlinkoPanel {
         muteBtn.addEventListener('click', () => {
             isMuted = !isMuted;
             muteBtn.classList.toggle('muted', isMuted);
-            const icon = muteBtn.querySelector('i');
-            if (icon) {
-                icon.setAttribute('data-lucide', isMuted ? 'volume-x' : 'volume-2');
-                lucide.createIcons();
+
+            // Update icon by replacing the entire SVG
+            if (isMuted) {
+                muteBtn.innerHTML = '<i data-lucide="volume-off"></i>';
+            } else {
+                muteBtn.innerHTML = '<i data-lucide="volume-2"></i>';
             }
+            lucide.createIcons();
         });
 
         // Bottom drop button functionality
