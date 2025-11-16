@@ -31,3 +31,5 @@ Bored of waiting for your AI agent to finish code? Gamble your time away with Pl
 - The multiplier slots show your potential winnings (in a real game)
 
 Enjoy playing Plinko while coding!
+
+Inspired by [AnsonH & aladdin-im Plinko](https://github.com/plinko-game-online/plinko-game-online.github.io)
