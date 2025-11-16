@@ -2,7 +2,7 @@
   "name": "plinko-vs",
   "displayName": "Plinko VS",
   "description": "Bored of waiting for your AI agent to finish code? Gamble your time away with Plinko right inside VSCode!",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "k4cperg",
   "license": "MIT",
   "icon": "src/plinko-icon.png",
